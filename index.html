@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ban Par Doctrine</title>
+  <style>
+    :root {
+      --bg1: #160808;
+      --bg2: #3b1111;
+      --panel: rgba(255,255,255,0.08);
+      --line: rgba(255,255,255,0.12);
+      --text: #fff3dd;
+      --mustard: #ffd64d;
+      --ketchup: #ff4b4b;
+      --relish: #7ed957;
+      --bun: #e8a85b;
+      --sausage: #9b3a24;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: Inter, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top, #5a1e1e 0%, var(--bg2) 35%, var(--bg1) 100%);
+      overflow-x: hidden;
+    }
+
+    .wrap {
+      width: min(100%, 1100px);
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .hero, .panel {
+      background: var(--panel);
+      border: 2px solid var(--line);
+      border-radius: 24px;
+      box-shadow: 0 18px 45px rgba(0,0,0,0.28);
+      backdrop-filter: blur(8px);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 28px 24px 140px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.4rem, 6vw, 5rem);
+      line-height: 0.9;
+      color: var(--mustard);
+      text-shadow:
+        3px 3px 0 var(--ketchup),
+        6px 6px 0 #000;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .sub {
+      max-width: 720px;
+      margin: 14px auto 0;
+      font-size: 1.05rem;
+      opacity: 0.95;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .panel {
+      padding: 20px;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 1.45rem;
+      color: var(--mustard);
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 22px;
+      display: grid;
+      gap: 10px;
+      line-height: 1.45;
+    }
+
+    .doctrine-list li strong {
+      color: white;
+    }
+
+    .tiers {
+      display: grid;
+      gap: 12px;
+    }
+
+    .tier {
+      border: 2px solid var(--line);
+      border-radius: 18px;
+      padding: 14px;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .tier h3 {
+      margin: 0 0 8px;
+      font-size: 1.05rem;
+      color: white;
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      text-align: center;
+      opacity: 0.8;
+      font-size: 0.92rem;
+    }
+
+    .hotdog-fleet {
+      position: absolute;
+      inset: auto 0 16px 0;
+      height: 120px;
+      pointer-events: none;
+    }
+
+    .floatdog {
+      position: absolute;
+      width: 180px;
+      height: 90px;
+      animation: drift 7s ease-in-out infinite;
+      filter: drop-shadow(0 12px 14px rgba(0,0,0,0.3));
+    }
+
+    .floatdog:nth-child(1) { left: 5%; animation-delay: 0s; transform: rotate(-8deg); }
+    .floatdog:nth-child(2) { left: 38%; animation-delay: 1.6s; transform: rotate(6deg) scale(0.92); }
+    .floatdog:nth-child(3) { right: 5%; animation-delay: 3.1s; transform: rotate(-4deg) scale(1.05); }
+
+    @keyframes drift {
+      0%, 100% { translate: 0 0; }
+      50% { translate: 0 -12px; }
+    }
+
+    .bun-top, .bun-bottom, .dog, .mustard, .ketchup, .relish {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 999px;
+    }
+
+    .bun-top {
+      top: 10px;
+      width: 170px;
+      height: 34px;
+      background: var(--bun);
+      box-shadow: inset 0 -4px 0 rgba(0,0,0,0.08);
+    }
+
+    .bun-bottom {
+      top: 42px;
+      width: 170px;
+      height: 26px;
+      background: #d99244;
+    }
+
+    .dog {
+      top: 28px;
+      width: 112px;
+      height: 24px;
+      background: var(--sausage);
+      z-index: 2;
+    }
+
+    .mustard, .ketchup, .relish {
+      width: 112px;
+      height: 10px;
+      top: 24px;
+      z-index: 3;
+      opacity: 0.95;
+    }
+
+    .mustard {
+      background: repeating-linear-gradient(90deg, transparent 0 10px, var(--mustard) 10px 18px, transparent 18px 28px);
+    }
+
+    .ketchup {
+      top: 30px;
+      background: repeating-linear-gradient(90deg, transparent 0 14px, var(--ketchup) 14px 22px, transparent 22px 30px);
+    }
+
+    .relish {
+      top: 36px;
+      background: repeating-linear-gradient(90deg, transparent 0 8px, var(--relish) 8px 12px, transparent 12px 18px);
+      opacity: 0.75;
+    }
+
+    .stamp {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 10px 16px;
+      border: 3px dashed var(--ketchup);
+      color: #fff;
+      border-radius: 14px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      transform: rotate(-4deg);
+      background: rgba(255,75,75,0.08);
+    }
+
+    @media (max-width: 850px) {
+      .grid { grid-template-columns: 1fr; }
+      .hero { padding-bottom: 180px; }
+      .floatdog { width: 150px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <h1>ban par doctrine</h1>
+      <div class="sub">
+        a deeply unserious single-file constitutional framework for determining when par has once again committed crimes against stability, clarity, or the general vibe.
+      </div>
+      <div class="stamp">totally normal policy document</div>
+
+      <div class="hotdog-fleet" aria-hidden="true">
+        <div class="floatdog">
+          <div class="bun-top"></div><div class="dog"></div><div class="mustard"></div><div class="ketchup"></div><div class="relish"></div><div class="bun-bottom"></div>
+        </div>
+        <div class="floatdog">
+          <div class="bun-top"></div><div class="dog"></div><div class="mustard"></div><div class="ketchup"></div><div class="relish"></div><div class="bun-bottom"></div>
+        </div>
+        <div class="floatdog">
+          <div class="bun-top"></div><div class="dog"></div><div class="mustard"></div><div class="ketchup"></div><div class="relish"></div><div class="bun-bottom"></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="grid">
+      <section class="panel">
+        <h2>core principles</h2>
+        <ul class="doctrine-list">
+          <li><strong>par is presumed chaotic</strong> until proven merely misguided.</li>
+          <li><strong>all suspicious acts shall be reviewed</strong> under the hot dog standard of reasonableness.</li>
+          <li><strong>memes are admissible evidence</strong>, especially if they are stupid and accurate.</li>
+          <li><strong>ban recommendations must remain comedic</strong> and may not become actual weird authoritarian paperwork.</li>
+          <li><strong>redeemability exists</strong> if par posts something funny enough to offset the offense.</li>
+        </ul>
+      </section>
+
+      <section class="panel">
+        <h2>triggering events</h2>
+        <ul>
+          <li>repeatedly asking for things that were already posted three messages ago</li>
+          <li>attempting to turn burger jokes into legal entities</li>
+          <li>causing general vibe corrosion</li>
+          <li>posting with inexplicable confidence while being objectively wrong</li>
+          <li>deploying cursed initiative without proper snack oversight</li>
+        </ul>
+      </section>
+
+      <section class="panel">
+        <h2>graduated response tiers</h2>
+        <div class="tiers">
+          <div class="tier">
+            <h3>tier 1 — warning glizzy</h3>
+            <div>a floating hot dog observes the offender in silence.</div>
+          </div>
+          <div class="tier">
+            <h3>tier 2 — public clown notation</h3>
+            <div>the doctrine records that par may be doing too much.</div>
+          </div>
+          <div class="tier">
+            <h3>tier 3 — temporary bunger review</h3>
+            <div>all activities suspended pending burger-based reflection.</div>
+          </div>
+          <div class="tier">
+            <h3>tier 4 — ceremonial ban recommendation</h3>
+            <div>non-binding, theatrical, and primarily for hater documentation purposes.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>appeals process</h2>
+        <ul>
+          <li>submit one genuinely funny defense</li>
+          <li>provide supporting evidence in the form of an image, bit, or cursed prototype</li>
+          <li>demonstrate that the offense was funny enough to justify itself</li>
+          <li>if the panel laughs, sanctions may be reduced</li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="footer-note">
+      single-file doctrine page. no backend. no database. only vibes, html hot dogs, and deeply unserious governance.
+    </div>
+  </div>
+</body>
+</html>
